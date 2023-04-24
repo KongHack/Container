@@ -1,0 +1,28 @@
+includes:
+	- phpstan.neon.dist
+	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
+parameters:
+	reportUnmatchedIgnoredErrors: false
+	excludePaths:
+		- %rootDir%/../../../src/Generated/*
+		- %rootDir%/../../../src/Composer.php
+		- %rootDir%/../../../src/CronJobs/PendingApplicationDigestCron.php
+
+	ignoreErrors:
+		- '#Access to an undefined property DOMElement*#'
+		- '#Empty array passed to foreach#'
+		- '#Function d invoked with*#'
+		- '#Call to static.*Uuid::fromBytes.*#'
+		- '#.*in empty\(\) always exists and is not falsy.*#'
+		- '#Call to an undefined method Clue\\React\\Redis\\Client.*#'
+		- '#.*callback of function call_user_func.*#'
+
+	parallel:
+		processTimeout: 3000.0
+		maximumNumberOfProcesses: 1
+
+	tipsOfTheDay: false
+
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false
+	treatPhpDocTypesAsCertain: false
