@@ -7,13 +7,7 @@ parameters:
 		- %rootDir%/../../../src/CronJobs/PendingApplicationDigestCron.php
 
 	ignoreErrors:
-		- '#Access to an undefined property DOMElement*#'
-		- '#Empty array passed to foreach#'
 		- '#Function d invoked with*#'
-		- '#Call to static.*Uuid::fromBytes.*#'
-		- '#.*in empty\(\) always exists and is not falsy.*#'
-		- '#Call to an undefined method Clue\\React\\Redis\\Client.*#'
-		- '#.*callback of function call_user_func.*#'
 
 	parallel:
 		processTimeout: 3000.0

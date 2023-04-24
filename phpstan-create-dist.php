@@ -3,7 +3,7 @@
 
 $tmp = explode(DIRECTORY_SEPARATOR, __DIR__);
 
-$hunt  = 'ace2-deploy';
+$hunt  = 'Container';
 $index = array_search($hunt, $tmp);
 
 $instance = $tmp[$index - 2];
@@ -15,14 +15,14 @@ $output  = trim($output??'');
 $tmp     = explode(' ',$output);
 $version = array_pop($tmp);
 
-$path = '/tmp/acephpstan/'.$worker.'-'.$instance.'-'.$version.'/';
+$path = '/tmp/container-phpstan/'.$worker.'-'.$instance.'-'.$version.'/';
 
 echo PHP_EOL;
 echo 'CONFIGURED TEMP PATH: ',$path,PHP_EOL;
 echo PHP_EOL;
 
-if(!is_dir('/tmp/acephpstan')) {
-    mkdir('/tmp/acephpstan');
+if(!is_dir('/tmp/container-phpstan')) {
+    mkdir('/tmp/container-phpstan');
 }
 if(!is_dir($path)) {
     mkdir($path);
@@ -30,7 +30,7 @@ if(!is_dir($path)) {
     echo '!!! WOO, path already exists !!! We might be in the clear here !!! ';
 }
 
-$dirs = array_filter(glob('/tmp/acephpstan/*'), 'is_dir');
+$dirs = array_filter(glob('/tmp/container-phpstan/*'), 'is_dir');
 print_r($dirs);
 
 
