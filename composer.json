@@ -24,7 +24,8 @@
     "gcworld/routing": "^5.1.0",
     "gcworld/utilities": "^2.0.0",
     "symfony/yaml": "^6.2.7",
-    "ramsey/uuid": "^4.6"
+    "ramsey/uuid": "^4.6",
+    "psr/container": "^2.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^1.9.3",
