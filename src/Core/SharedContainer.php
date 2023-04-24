@@ -10,6 +10,8 @@ use Psr\Container\ContainerInterface;
  */
 class SharedContainer implements ContainerInterface
 {
+    public const DEFAULT_INSTANCE = 'GCUNIVERSAL';
+
     protected static array $instances = [];
 
     protected array $items = [];
@@ -18,7 +20,7 @@ class SharedContainer implements ContainerInterface
      * @param string $name
      * @return static
      */
-    public static function getInstance(string $name): static
+    public static function getInstance(string $name = self::DEFAULT_INSTANCE): static
     {
         if(!isset(static::$instances[$name])) {
             static::$instances[$name] = new static();
