@@ -3,6 +3,9 @@ namespace GCWorld\Container\Core;
 
 use GCWorld\Container\Exceptions\ItemAlreadyExistsException;
 use GCWorld\Container\Exceptions\ItemNotFoundException;
+use GCWorld\Container\Exceptions\SpecificItemException;
+use GCWorld\Interfaces\CommonInterface;
+use GCWorld\Interfaces\UserInterface;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -11,6 +14,10 @@ use Psr\Container\ContainerInterface;
 class SharedContainer implements ContainerInterface
 {
     public const DEFAULT_INSTANCE = 'GCUNIVERSAL';
+    public const RESTRICTED = [
+        'common' => 'setCommon',
+        'user'   => 'setUser',
+    ];
 
     protected static array $instances = [];
 
@@ -60,6 +67,7 @@ class SharedContainer implements ContainerInterface
      */
     public function set(string $id, mixed $item): void
     {
+        $this->checkSpecific($id);
         if(isset($this->items[$id])) {
             throw new ItemAlreadyExistsException('Item Already Exists: '.$id);
         }
@@ -74,6 +82,73 @@ class SharedContainer implements ContainerInterface
      */
     public function overwrite(string $id, mixed $item): void
     {
+        $this->checkSpecific($id);
         $this->items[$id] = $item;
+    }
+
+    /**
+     * @param CommonInterface $cCommon
+     * @return void
+     * @throws ItemAlreadyExistsException
+     */
+    public function setCommon(CommonInterface $cCommon)
+    {
+        if(isset($this->items['common'])) {
+            throw new ItemAlreadyExistsException('Common is already set');
+        }
+
+        $this->items['common'] = $cCommon;
+    }
+
+    /**
+     * @param UserInterface $cUser
+     * @return void
+     * @throws ItemAlreadyExistsException
+     */
+    public function setUser(UserInterface $cUser)
+    {
+        if(isset($this->items['user'])) {
+            throw new ItemAlreadyExistsException('User is already set');
+        }
+
+        $this->items['user'] = $cUser;
+    }
+
+    /**
+     * @return CommonInterface
+     * @throws ItemNotFoundException
+     */
+    public function getCommon(): CommonInterface
+    {
+        if(!isset($this->items['common'])) {
+            throw new ItemNotFoundException('Common has not been defined');
+        }
+
+        return $this->items['common'];
+    }
+
+    /**
+     * @return UserInterface
+     * @throws ItemNotFoundException
+     */
+    public function getUser(): UserInterface
+    {
+        if(!isset($this->items['user'])) {
+            throw new ItemNotFoundException('User has not been defined');
+        }
+
+        return $this->items['user'];
+    }
+
+    /**
+     * @param string $id
+     * @return void
+     * @throws SpecificItemException
+     */
+    protected function checkSpecific(string $id): void
+    {
+        if(isset(self::RESTRICTED[strtolower($id)])) {
+            throw new SpecificItemException('Please use the "'.self::RESTRICTED[$id].'" method to set "'.$id.'"');
+        }
     }
 }

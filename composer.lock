@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f947a4547a4d42efe74488e809d7305",
+    "content-hash": "574377a712b5757d31ad6140a66a481b",
     "packages": [
         {
             "name": "brick/math",
@@ -1062,20 +1062,20 @@
         },
         {
             "name": "gcworld/interfaces",
-            "version": "4.1.5",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KongHack/Interfaces.git",
-                "reference": "74b5084ad9257fa4437ea83fbff040bb575745f7"
+                "reference": "e6c68e5476f5eb3f9f22bb0fabd029fa27a14be7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KongHack/Interfaces/zipball/74b5084ad9257fa4437ea83fbff040bb575745f7",
-                "reference": "74b5084ad9257fa4437ea83fbff040bb575745f7",
+                "url": "https://api.github.com/repos/KongHack/Interfaces/zipball/e6c68e5476f5eb3f9f22bb0fabd029fa27a14be7",
+                "reference": "e6c68e5476f5eb3f9f22bb0fabd029fa27a14be7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0"
+                "php": ">=8.1"
             },
             "require-dev": {
                 "gcworld/code_sniffer_contrib": "^2.0.4",
@@ -1098,12 +1098,12 @@
                     "email": "admin@gamecharmer.com"
                 }
             ],
-            "description": "GCWorld Industries Interfaces",
+            "description": "GCWorld Interfaces",
             "support": {
                 "issues": "https://github.com/KongHack/Interfaces/issues",
-                "source": "https://github.com/KongHack/Interfaces/tree/4.1.5"
+                "source": "https://github.com/KongHack/Interfaces/tree/4.2.0"
             },
-            "time": "2023-03-06T14:39:47+00:00"
+            "time": "2023-04-24T04:15:44+00:00"
         },
         {
             "name": "gcworld/objectmanager",
