@@ -5,6 +5,7 @@ use GCWorld\Container\Exceptions\ItemAlreadyExistsException;
 use GCWorld\Container\Exceptions\ItemNotFoundException;
 use GCWorld\Container\Exceptions\SpecificItemException;
 use GCWorld\Interfaces\CommonInterface;
+use GCWorld\Interfaces\TwigInterface;
 use GCWorld\Interfaces\UserInterface;
 use Psr\Container\ContainerInterface;
 
@@ -17,6 +18,7 @@ class SharedContainer implements ContainerInterface
     public const RESTRICTED = [
         'common' => 'setCommon',
         'user'   => 'setUser',
+        'twig'   => 'setTwig',
     ];
 
     protected static array $instances = [];
@@ -101,6 +103,20 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
+     * @param TwigInterface $cTwig
+     * @return void
+     * @throws ItemAlreadyExistsException
+     */
+    public function setTwig(TwigInterface $cTwig)
+    {
+        if(isset($this->items['twig'])) {
+            throw new ItemAlreadyExistsException('Twig is already set');
+        }
+
+        $this->items['twig'] = $cTwig;
+    }
+
+    /**
      * @param UserInterface $cUser
      * @return void
      * @throws ItemAlreadyExistsException
@@ -125,6 +141,19 @@ class SharedContainer implements ContainerInterface
         }
 
         return $this->items['common'];
+    }
+
+    /**
+     * @return TwigInterface
+     * @throws ItemNotFoundException
+     */
+    public function getTwig(): TwigInterface
+    {
+        if(!isset($this->items['twig'])) {
+            throw new ItemNotFoundException('Twig has not been defined');
+        }
+
+        return $this->items['twig'];
     }
 
     /**
