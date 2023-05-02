@@ -15,7 +15,7 @@ use Psr\Container\ContainerInterface;
 class SharedContainer implements ContainerInterface
 {
     public const DEFAULT_INSTANCE = 'GCUNIVERSAL';
-    public const RESTRICTED = [
+    public const RESTRICTED       = [
         'common' => 'setCommon',
         'user'   => 'setUser',
         'twig'   => 'setTwig',
@@ -27,11 +27,12 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param string $name
+     *
      * @return static
      */
     public static function getInstance(string $name = self::DEFAULT_INSTANCE): static
     {
-        if(!isset(static::$instances[$name])) {
+        if (!isset(static::$instances[$name])) {
             static::$instances[$name] = new static();
         }
 
@@ -40,12 +41,14 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param string $id
-     * @return mixed
+     *
      * @throws ItemNotFoundException
+     *
+     * @return mixed
      */
     public function get(string $id)
     {
-        if(!isset($this->items[$id])) {
+        if (!isset($this->items[$id])) {
             throw new ItemNotFoundException('Item Not Found: '.$id);
         }
 
@@ -54,6 +57,7 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param string $id
+     *
      * @return bool
      */
     public function has(string $id): bool
@@ -63,14 +67,16 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param string $id
-     * @param mixed $item
-     * @return void
+     * @param mixed  $item
+     *
      * @throws ItemAlreadyExistsException
+     *
+     * @return void
      */
     public function set(string $id, mixed $item): void
     {
         $this->checkSpecific($id);
-        if(isset($this->items[$id])) {
+        if (isset($this->items[$id])) {
             throw new ItemAlreadyExistsException('Item Already Exists: '.$id);
         }
 
@@ -79,7 +85,8 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param string $id
-     * @param mixed $item
+     * @param mixed  $item
+     *
      * @return void
      */
     public function overwrite(string $id, mixed $item): void
@@ -90,12 +97,14 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param CommonInterface $cCommon
-     * @return void
+     *
      * @throws ItemAlreadyExistsException
+     *
+     * @return void
      */
-    public function setCommon(CommonInterface $cCommon)
+    public function setCommon(CommonInterface $cCommon): void
     {
-        if(isset($this->items['common'])) {
+        if (isset($this->items['common'])) {
             throw new ItemAlreadyExistsException('Common is already set');
         }
 
@@ -104,12 +113,14 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param TwigInterface $cTwig
-     * @return void
+     *
      * @throws ItemAlreadyExistsException
+     *
+     * @return void
      */
-    public function setTwig(TwigInterface $cTwig)
+    public function setTwig(TwigInterface $cTwig): void
     {
-        if(isset($this->items['twig'])) {
+        if (isset($this->items['twig'])) {
             throw new ItemAlreadyExistsException('Twig is already set');
         }
 
@@ -118,12 +129,14 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param UserInterface $cUser
-     * @return void
+     *
      * @throws ItemAlreadyExistsException
+     *
+     * @return void
      */
-    public function setUser(UserInterface $cUser)
+    public function setUser(UserInterface $cUser): void
     {
-        if(isset($this->items['user'])) {
+        if (isset($this->items['user'])) {
             throw new ItemAlreadyExistsException('User is already set');
         }
 
@@ -131,12 +144,13 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @return CommonInterface
      * @throws ItemNotFoundException
+     *
+     * @return CommonInterface
      */
     public function getCommon(): CommonInterface
     {
-        if(!isset($this->items['common'])) {
+        if (!isset($this->items['common'])) {
             throw new ItemNotFoundException('Common has not been defined');
         }
 
@@ -144,12 +158,13 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @return TwigInterface
      * @throws ItemNotFoundException
+     *
+     * @return TwigInterface
      */
     public function getTwig(): TwigInterface
     {
-        if(!isset($this->items['twig'])) {
+        if (!isset($this->items['twig'])) {
             throw new ItemNotFoundException('Twig has not been defined');
         }
 
@@ -157,12 +172,13 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @return UserInterface
      * @throws ItemNotFoundException
+     *
+     * @return UserInterface
      */
     public function getUser(): UserInterface
     {
-        if(!isset($this->items['user'])) {
+        if (!isset($this->items['user'])) {
             throw new ItemNotFoundException('User has not been defined');
         }
 
@@ -171,12 +187,14 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param string $id
-     * @return void
+     *
      * @throws SpecificItemException
+     *
+     * @return void
      */
     protected function checkSpecific(string $id): void
     {
-        if(isset(self::RESTRICTED[strtolower($id)])) {
+        if (isset(self::RESTRICTED[\strtolower($id)])) {
             throw new SpecificItemException('Please use the "'.self::RESTRICTED[$id].'" method to set "'.$id.'"');
         }
     }
