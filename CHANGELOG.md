@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.2](https://github.com/KongHack/Containerreleases/tag/1.0.2)
+- @GameCharmer Add get/set Globals methods
+
+
+
 ## [1.0.1](https://github.com/KongHack/Containerreleases/tag/1.0.1)
 - @GameCharmer Add get/set Twig methods
 

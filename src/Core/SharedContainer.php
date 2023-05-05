@@ -189,12 +189,14 @@ class SharedContainer implements ContainerInterface
 
     /**
      * @param GlobalsInterface $cGlobals
-     * @return void
+     *
      * @throws ItemAlreadyExistsException
+     *
+     * @return void
      */
     public function setGlobals(GlobalsInterface $cGlobals): void
     {
-        if(isset($this->items['globals'])) {
+        if (isset($this->items['globals'])) {
             throw new ItemAlreadyExistsException('Globals is already set');
         }
 
@@ -202,8 +204,9 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @return GlobalsInterface
      * @throws ItemNotFoundException
+     *
+     * @return GlobalsInterface
      */
     public function getGlobals(): GlobalsInterface
     {
