@@ -17,7 +17,7 @@
     "ext-json": "*",
     "gcworld/common":"^2.7.2",
     "gcworld/database": "^2.6.2",
-    "gcworld/globals": "^3.2",
+    "gcworld/globals": "^3.3",
     "gcworld/interfaces": "^4.2.0",
     "gcworld/objectmanager": "^2.8.0",
     "gcworld/orm": "^6.3.3",

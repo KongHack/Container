@@ -4,6 +4,7 @@ namespace GCWorld\Container\Core;
 use GCWorld\Container\Exceptions\ItemAlreadyExistsException;
 use GCWorld\Container\Exceptions\ItemNotFoundException;
 use GCWorld\Container\Exceptions\SpecificItemException;
+use GCWorld\Globals\GlobalsInterface;
 use GCWorld\Interfaces\CommonInterface;
 use GCWorld\Interfaces\TwigInterface;
 use GCWorld\Interfaces\UserInterface;
@@ -16,9 +17,10 @@ class SharedContainer implements ContainerInterface
 {
     public const DEFAULT_INSTANCE = 'GCUNIVERSAL';
     public const RESTRICTED       = [
-        'common' => 'setCommon',
-        'user'   => 'setUser',
-        'twig'   => 'setTwig',
+        'common'  => 'setCommon',
+        'user'    => 'setUser',
+        'twig'    => 'setTwig',
+        'globals' => 'setGlobals',
     ];
 
     protected static array $instances = [];
@@ -46,7 +48,7 @@ class SharedContainer implements ContainerInterface
      *
      * @return mixed
      */
-    public function get(string $id)
+    public function get(string $id): mixed
     {
         if (!isset($this->items[$id])) {
             throw new ItemNotFoundException('Item Not Found: '.$id);
@@ -183,6 +185,33 @@ class SharedContainer implements ContainerInterface
         }
 
         return $this->items['user'];
+    }
+
+    /**
+     * @param GlobalsInterface $cGlobals
+     * @return void
+     * @throws ItemAlreadyExistsException
+     */
+    public function setGlobals(GlobalsInterface $cGlobals): void
+    {
+        if(isset($this->items['globals'])) {
+            throw new ItemAlreadyExistsException('Globals is already set');
+        }
+
+        $this->items['globals'] = $cGlobals;
+    }
+
+    /**
+     * @return GlobalsInterface
+     * @throws ItemNotFoundException
+     */
+    public function getGlobals(): GlobalsInterface
+    {
+        if (!isset($this->items['globals'])) {
+            throw new ItemNotFoundException('Globals has not been defined');
+        }
+
+        return $this->items['globals'];
     }
 
     /**

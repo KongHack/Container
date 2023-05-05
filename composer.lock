@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "574377a712b5757d31ad6140a66a481b",
+    "content-hash": "1ae6f96a413fd77f240b0e3984438f6c",
     "packages": [
         {
             "name": "brick/math",
@@ -1019,16 +1019,16 @@
         },
         {
             "name": "gcworld/globals",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KongHack/Globals.git",
-                "reference": "35e6dfece0f4379bb93167160d12548547147aae"
+                "reference": "1d5c111ea842efd5324a74cd8a71fe1bcffdcbf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KongHack/Globals/zipball/35e6dfece0f4379bb93167160d12548547147aae",
-                "reference": "35e6dfece0f4379bb93167160d12548547147aae",
+                "url": "https://api.github.com/repos/KongHack/Globals/zipball/1d5c111ea842efd5324a74cd8a71fe1bcffdcbf7",
+                "reference": "1d5c111ea842efd5324a74cd8a71fe1bcffdcbf7",
                 "shasum": ""
             },
             "require": {
@@ -1056,9 +1056,9 @@
             "description": "Globals",
             "homepage": "http://gamecharmer.com",
             "support": {
-                "source": "https://github.com/KongHack/Globals/tree/3.2.0"
+                "source": "https://github.com/KongHack/Globals/tree/3.3.0"
             },
-            "time": "2022-11-17T11:00:08+00:00"
+            "time": "2023-05-05T06:12:40+00:00"
         },
         {
             "name": "gcworld/interfaces",
