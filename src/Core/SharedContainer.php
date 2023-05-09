@@ -6,6 +6,8 @@ use GCWorld\Container\Exceptions\ItemNotFoundException;
 use GCWorld\Container\Exceptions\SpecificItemException;
 use GCWorld\Globals\GlobalsInterface;
 use GCWorld\Interfaces\CommonInterface;
+use GCWorld\Interfaces\PageWrapper;
+use GCWorld\Interfaces\RoutingInterface;
 use GCWorld\Interfaces\TwigInterface;
 use GCWorld\Interfaces\UserInterface;
 use Psr\Container\ContainerInterface;
@@ -17,10 +19,12 @@ class SharedContainer implements ContainerInterface
 {
     public const DEFAULT_INSTANCE = 'GCUNIVERSAL';
     public const RESTRICTED       = [
-        'common'  => 'setCommon',
-        'user'    => 'setUser',
-        'twig'    => 'setTwig',
-        'globals' => 'setGlobals',
+        'common'       => 'setCommon',
+        'user'         => 'setUser',
+        'twig'         => 'setTwig',
+        'globals'      => 'setGlobals',
+        'router'       => 'setRouter',
+        'page_wrapper' => 'setPageWrapper',
     ];
 
     protected static array $instances = [];
@@ -215,6 +219,66 @@ class SharedContainer implements ContainerInterface
         }
 
         return $this->items['globals'];
+    }
+
+    /**
+     * @param PageWrapper $cGlobals
+     *
+     * @throws ItemAlreadyExistsException
+     *
+     * @return void
+     */
+    public function setPageWrapper(PageWrapper $cGlobals): void
+    {
+        if (isset($this->items['page_wrapper'])) {
+            throw new ItemAlreadyExistsException('PageWrapper is already set');
+        }
+
+        $this->items['page_wrapper'] = $cGlobals;
+    }
+
+    /**
+     * @throws ItemNotFoundException
+     *
+     * @return PageWrapper
+     */
+    public function getPageWrapper(): PageWrapper
+    {
+        if (!isset($this->items['page_wrapper'])) {
+            throw new ItemNotFoundException('Globals has not been defined');
+        }
+
+        return $this->items['page_wrapper'];
+    }
+
+    /**
+     * @param RoutingInterface $cGlobals
+     *
+     * @throws ItemAlreadyExistsException
+     *
+     * @return void
+     */
+    public function setRouter(RoutingInterface $cGlobals): void
+    {
+        if (isset($this->items['router'])) {
+            throw new ItemAlreadyExistsException('Router is already set');
+        }
+
+        $this->items['router'] = $cGlobals;
+    }
+
+    /**
+     * @throws ItemNotFoundException
+     *
+     * @return RoutingInterface
+     */
+    public function getRouter(): RoutingInterface
+    {
+        if (!isset($this->items['router'])) {
+            throw new ItemNotFoundException('Router has not been defined');
+        }
+
+        return $this->items['router'];
     }
 
     /**
