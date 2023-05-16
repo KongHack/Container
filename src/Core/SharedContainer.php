@@ -58,6 +58,12 @@ class SharedContainer implements ContainerInterface
             throw new ItemNotFoundException('Item Not Found: '.$id);
         }
 
+        // Basically lazy loading
+        if (\is_callable($this->items[$id])) {
+            // Replace with instantiated object
+            $this->items[$id] = $this->items[$id]();
+        }
+
         return $this->items[$id];
     }
 
@@ -102,13 +108,13 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @param CommonInterface $cCommon
+     * @param CommonInterface|callable $cCommon
      *
      * @throws ItemAlreadyExistsException
      *
      * @return void
      */
-    public function setCommon(CommonInterface $cCommon): void
+    public function setCommon(CommonInterface|callable $cCommon): void
     {
         if (isset($this->items['common'])) {
             throw new ItemAlreadyExistsException('Common is already set');
@@ -118,13 +124,13 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @param TwigInterface $cTwig
+     * @param TwigInterface|callable $cTwig
      *
      * @throws ItemAlreadyExistsException
      *
      * @return void
      */
-    public function setTwig(TwigInterface $cTwig): void
+    public function setTwig(TwigInterface|callable $cTwig): void
     {
         if (isset($this->items['twig'])) {
             throw new ItemAlreadyExistsException('Twig is already set');
@@ -134,13 +140,13 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @param UserInterface $cUser
+     * @param UserInterface|callable $cUser
      *
      * @throws ItemAlreadyExistsException
      *
      * @return void
      */
-    public function setUser(UserInterface $cUser): void
+    public function setUser(UserInterface|callable $cUser): void
     {
         if (isset($this->items['user'])) {
             throw new ItemAlreadyExistsException('User is already set');
@@ -156,11 +162,15 @@ class SharedContainer implements ContainerInterface
      */
     public function getCommon(): CommonInterface
     {
-        if (!isset($this->items['common'])) {
+        $id = 'common';
+        if (!isset($this->items[$id])) {
             throw new ItemNotFoundException('Common has not been defined');
         }
+        if (\is_callable($this->items[$id])) {
+            $this->items[$id] = $this->items[$id]();
+        }
 
-        return $this->items['common'];
+        return $this->items[$id];
     }
 
     /**
@@ -170,11 +180,15 @@ class SharedContainer implements ContainerInterface
      */
     public function getTwig(): TwigInterface
     {
-        if (!isset($this->items['twig'])) {
+        $id = 'twig';
+        if (!isset($this->items[$id])) {
             throw new ItemNotFoundException('Twig has not been defined');
         }
+        if (\is_callable($this->items[$id])) {
+            $this->items[$id] = $this->items[$id]();
+        }
 
-        return $this->items['twig'];
+        return $this->items[$id];
     }
 
     /**
@@ -184,11 +198,15 @@ class SharedContainer implements ContainerInterface
      */
     public function getUser(): UserInterface
     {
-        if (!isset($this->items['user'])) {
+        $id = 'user';
+        if (!isset($this->items[$id])) {
             throw new ItemNotFoundException('User has not been defined');
         }
+        if (\is_callable($this->items[$id])) {
+            $this->items[$id] = $this->items[$id]();
+        }
 
-        return $this->items['user'];
+        return $this->items[$id];
     }
 
     /**
@@ -222,13 +240,13 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @param PageWrapper $cGlobals
+     * @param PageWrapper|callable $cGlobals
      *
      * @throws ItemAlreadyExistsException
      *
      * @return void
      */
-    public function setPageWrapper(PageWrapper $cGlobals): void
+    public function setPageWrapper(PageWrapper|callable $cGlobals): void
     {
         if (isset($this->items['page_wrapper'])) {
             throw new ItemAlreadyExistsException('PageWrapper is already set');
@@ -244,21 +262,25 @@ class SharedContainer implements ContainerInterface
      */
     public function getPageWrapper(): PageWrapper
     {
-        if (!isset($this->items['page_wrapper'])) {
-            throw new ItemNotFoundException('Globals has not been defined');
+        $id = 'page_wrapper';
+        if (!isset($this->items[$id])) {
+            throw new ItemNotFoundException('Page Wrapper has not been defined');
+        }
+        if (\is_callable($this->items[$id])) {
+            $this->items[$id] = $this->items[$id]();
         }
 
-        return $this->items['page_wrapper'];
+        return $this->items[$id];
     }
 
     /**
-     * @param RoutingInterface $cGlobals
+     * @param RoutingInterface|callable $cGlobals
      *
      * @throws ItemAlreadyExistsException
      *
      * @return void
      */
-    public function setRouter(RoutingInterface $cGlobals): void
+    public function setRouter(RoutingInterface|callable $cGlobals): void
     {
         if (isset($this->items['router'])) {
             throw new ItemAlreadyExistsException('Router is already set');
@@ -274,11 +296,15 @@ class SharedContainer implements ContainerInterface
      */
     public function getRouter(): RoutingInterface
     {
-        if (!isset($this->items['router'])) {
+        $id = 'router';
+        if (!isset($this->items[$id])) {
             throw new ItemNotFoundException('Router has not been defined');
         }
+        if (\is_callable($this->items[$id])) {
+            $this->items[$id] = $this->items[$id]();
+        }
 
-        return $this->items['router'];
+        return $this->items[$id];
     }
 
     /**
