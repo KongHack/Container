@@ -6,9 +6,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.4](https://github.com/KongHack/Containerreleases/tag/1.0.4)
+- @GameCharmer Allow callables in sets
+
+
+
 ## [1.0.3](https://github.com/KongHack/Containerreleases/tag/1.0.3)
 - @GameCharmer Add get/set PageWrapper methods
 - @GameCharmer Add get/set Router methods
+
 
 
 ## [1.0.2](https://github.com/KongHack/Containerreleases/tag/1.0.2)
