@@ -240,19 +240,19 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @param PageWrapper|callable $cGlobals
+     * @param PageWrapper|callable $cWrapper
      *
      * @throws ItemAlreadyExistsException
      *
      * @return void
      */
-    public function setPageWrapper(PageWrapper|callable $cGlobals): void
+    public function setPageWrapper(PageWrapper|callable $cWrapper): void
     {
         if (isset($this->items['page_wrapper'])) {
             throw new ItemAlreadyExistsException('PageWrapper is already set');
         }
 
-        $this->items['page_wrapper'] = $cGlobals;
+        $this->items['page_wrapper'] = $cWrapper;
     }
 
     /**
@@ -274,19 +274,19 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @param RoutingInterface|callable $cGlobals
+     * @param RoutingInterface|callable $cRouter
      *
      * @throws ItemAlreadyExistsException
      *
      * @return void
      */
-    public function setRouter(RoutingInterface|callable $cGlobals): void
+    public function setRouter(RoutingInterface|callable $cRouter): void
     {
         if (isset($this->items['router'])) {
             throw new ItemAlreadyExistsException('Router is already set');
         }
 
-        $this->items['router'] = $cGlobals;
+        $this->items['router'] = $cRouter;
     }
 
     /**
