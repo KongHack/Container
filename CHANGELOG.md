@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.6](https://github.com/KongHack/Containerreleases/tag/1.0.6)
+- @GameCharmer Add get/set UICore methods
+
+
+
 ## [1.0.5](https://github.com/KongHack/Containerreleases/tag/1.0.5)
 - @GameCharmer Update Variable Names
 

@@ -9,6 +9,7 @@ use GCWorld\Interfaces\CommonInterface;
 use GCWorld\Interfaces\PageWrapper;
 use GCWorld\Interfaces\RoutingInterface;
 use GCWorld\Interfaces\TwigInterface;
+use GCWorld\Interfaces\UICoreInterface;
 use GCWorld\Interfaces\UserInterface;
 use Psr\Container\ContainerInterface;
 
@@ -25,6 +26,7 @@ class SharedContainer implements ContainerInterface
         'globals'      => 'setGlobals',
         'router'       => 'setRouter',
         'page_wrapper' => 'setPageWrapper',
+        'ui_core'      => 'setUICore',
     ];
 
     protected static array $instances = [];
@@ -299,6 +301,40 @@ class SharedContainer implements ContainerInterface
         $id = 'router';
         if (!isset($this->items[$id])) {
             throw new ItemNotFoundException('Router has not been defined');
+        }
+        if (\is_callable($this->items[$id])) {
+            $this->items[$id] = $this->items[$id]();
+        }
+
+        return $this->items[$id];
+    }
+
+    /**
+     * @param UICoreInterface|callable $cUICore
+     *
+     * @throws ItemAlreadyExistsException
+     *
+     * @return void
+     */
+    public function setUICore(UICoreInterface|callable $cUICore): void
+    {
+        if (isset($this->items['ui_core'])) {
+            throw new ItemAlreadyExistsException('UI Core is already set');
+        }
+
+        $this->items['ui_core'] = $cUICore;
+    }
+
+    /**
+     * @throws ItemNotFoundException
+     *
+     * @return UICoreInterface
+     */
+    public function getUICore(): UICoreInterface
+    {
+        $id = 'ui_core';
+        if (!isset($this->items[$id])) {
+            throw new ItemNotFoundException('UI Core has not been defined');
         }
         if (\is_callable($this->items[$id])) {
             $this->items[$id] = $this->items[$id]();
