@@ -6,38 +6,43 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [1.0.6](https://github.com/KongHack/Containerreleases/tag/1.0.6)
+## [1.0.7](https://github.com/KongHack/Container/releases/tag/1.0.7)
+- @GameCharmer update composer.json requirements
+
+
+
+## [1.0.6](https://github.com/KongHack/Container/releases/tag/1.0.6)
 - @GameCharmer Add get/set UICore methods
 
 
 
-## [1.0.5](https://github.com/KongHack/Containerreleases/tag/1.0.5)
+## [1.0.5](https://github.com/KongHack/Container/releases/tag/1.0.5)
 - @GameCharmer Update Variable Names
 
 
 
-## [1.0.4](https://github.com/KongHack/Containerreleases/tag/1.0.4)
+## [1.0.4](https://github.com/KongHack/Container/releases/tag/1.0.4)
 - @GameCharmer Allow callables in sets
 
 
 
-## [1.0.3](https://github.com/KongHack/Containerreleases/tag/1.0.3)
+## [1.0.3](https://github.com/KongHack/Container/releases/tag/1.0.3)
 - @GameCharmer Add get/set PageWrapper methods
 - @GameCharmer Add get/set Router methods
 
 
 
-## [1.0.2](https://github.com/KongHack/Containerreleases/tag/1.0.2)
+## [1.0.2](https://github.com/KongHack/Container/releases/tag/1.0.2)
 - @GameCharmer Add get/set Globals methods
 
 
 
-## [1.0.1](https://github.com/KongHack/Containerreleases/tag/1.0.1)
+## [1.0.1](https://github.com/KongHack/Container/releases/tag/1.0.1)
 - @GameCharmer Add get/set Twig methods
 
 
 
-## [1.0.0](https://github.com/KongHack/Containerreleases/tag/1.0.0)
+## [1.0.0](https://github.com/KongHack/Container/releases/tag/1.0.0)
 - @GameCharmer Initial Version
 
 
