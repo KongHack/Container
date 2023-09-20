@@ -6,6 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.0.8](https://github.com/KongHack/Container/releases/tag/1.0.8)
+- @GameCharmer Update Shared Container
+  - Protect Constructor
+  - Add `getItemKeys` method
+
+
+
 ## [1.0.7](https://github.com/KongHack/Container/releases/tag/1.0.7)
 - @GameCharmer update composer.json requirements
 
