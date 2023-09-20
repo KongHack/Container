@@ -34,6 +34,12 @@ class SharedContainer implements ContainerInterface
     protected array $items = [];
 
     /**
+     * SharedContainer Constructor
+     */
+    protected function __construct() { }
+
+
+    /**
      * @param string $name
      *
      * @return static
@@ -45,6 +51,14 @@ class SharedContainer implements ContainerInterface
         }
 
         return static::$instances[$name];
+    }
+
+    /**
+     * @return array
+     */
+    public function getItemKeys(): array
+    {
+        return array_keys($this->items);
     }
 
     /**
