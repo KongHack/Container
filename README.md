@@ -2,4 +2,4 @@
 Service Container
 
 ### Version
-1.0.9
+1.0.10
