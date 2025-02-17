@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.1.0](https://github.com/KongHack/Container/releases/tag/1.1.0)
+- @GameCharmer PHP 8.4
+
+
+
 ## [1.0.11](https://github.com/KongHack/Container/releases/tag/1.0.11)
 - @GameCharmer Update composer dependencies
 
