@@ -11,6 +11,7 @@ use GCWorld\Interfaces\RoutingInterface;
 use GCWorld\Interfaces\TwigInterface;
 use GCWorld\Interfaces\UICoreInterface;
 use GCWorld\Interfaces\UserInterface;
+use GCWorld\ObjectManager\ObjectManager;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -20,13 +21,14 @@ class SharedContainer implements ContainerInterface
 {
     public const DEFAULT_INSTANCE = 'GCUNIVERSAL';
     public const RESTRICTED       = [
-        'common'       => 'setCommon',
-        'user'         => 'setUser',
-        'twig'         => 'setTwig',
-        'globals'      => 'setGlobals',
-        'router'       => 'setRouter',
-        'page_wrapper' => 'setPageWrapper',
-        'ui_core'      => 'setUICore',
+        'common'        => 'setCommon',
+        'user'          => 'setUser',
+        'twig'          => 'setTwig',
+        'globals'       => 'setGlobals',
+        'router'        => 'setRouter',
+        'page_wrapper'  => 'setPageWrapper',
+        'ui_core'       => 'setUICore',
+        'object_manager'=> 'setObjectManager',
     ];
 
     protected static array $instances = [];
@@ -349,6 +351,40 @@ class SharedContainer implements ContainerInterface
         $id = 'ui_core';
         if (!isset($this->items[$id])) {
             throw new ItemNotFoundException('UI Core has not been defined');
+        }
+        if (\is_callable($this->items[$id])) {
+            $this->items[$id] = $this->items[$id]();
+        }
+
+        return $this->items[$id];
+    }
+
+    /**
+     * @param ObjectManager|callable $cUICore
+     *
+     * @throws ItemAlreadyExistsException
+     *
+     * @return void
+     */
+    public function setObjectManager(ObjectManager|callable $cUICore): void
+    {
+        if (isset($this->items['object_manager'])) {
+            throw new ItemAlreadyExistsException('Object Manager is already set');
+        }
+
+        $this->items['object_manager'] = $cUICore;
+    }
+
+    /**
+     * @throws ItemNotFoundException
+     *
+     * @return ObjectManager
+     */
+    public function getObjectManager(): ObjectManager
+    {
+        $id = 'object_manager';
+        if (!isset($this->items[$id])) {
+            throw new ItemNotFoundException('Object Manager has not been defined');
         }
         if (\is_callable($this->items[$id])) {
             $this->items[$id] = $this->items[$id]();

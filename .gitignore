@@ -3,7 +3,7 @@
 .phive/*
 .composer/*
 .churn.cache
-!.composer/auth.json
+.composer/auth.json
 .ssh/*
 .gnupg/*
 .gitconfig
@@ -11,28 +11,7 @@
 .php-cs-fixer.php.cache
 .php-cs-fixer.cache
 .phpunit.result.cache
-phpDocumentor.phar
-autoload/GCWorld/ORM/Generated/*
-private/*
-twig/cache/*
 vendor/*
-public_html/.temp/*
-public_html/.cache/*
-public_html/courses/*
-public_html/assets/temp_*
-public_html/assets/temp.css
-public_html/phpdocs/*
-public_html/sami-docs/*
-tools/*
-config/config.ini
-config/config.yml
-config/config.php
-config/GCWorld_ORM.php
-config/schema_compiler.ini
-
-supervisor/generated/*
-gearman/*
-!gearman/.gitkeep
 
 .bash_history
 .mysql_history
@@ -49,4 +28,4 @@ stantmp/*
 
 phpstan.neon.dist
 
-submodules/
+composer.lock
