@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.1.3](https://github.com/KongHack/Container/releases/tag/1.1.3)
+- @GameCharmer patch return type
+
+
+
 ## [1.1.2](https://github.com/KongHack/Container/releases/tag/1.1.2)
 - @GameCharmer Add support for Exception Logger
 

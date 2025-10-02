@@ -414,9 +414,9 @@ class SharedContainer implements ContainerInterface
     /**
      * @throws ItemNotFoundException
      *
-     * @return ObjectManager
+     * @return ExceptionLoggerInterface
      */
-    public function getExceptionLogger(): ObjectManager
+    public function getExceptionLogger(): ExceptionLoggerInterface
     {
         $id = 'exception_logger';
         if (!isset($this->items[$id])) {
