@@ -6,6 +6,7 @@ use GCWorld\Container\Exceptions\ItemNotFoundException;
 use GCWorld\Container\Exceptions\SpecificItemException;
 use GCWorld\Globals\GlobalsInterface;
 use GCWorld\Interfaces\CommonInterface;
+use GCWorld\Interfaces\ExceptionLoggerInterface;
 use GCWorld\Interfaces\PageWrapper;
 use GCWorld\Interfaces\RoutingInterface;
 use GCWorld\Interfaces\TwigInterface;
@@ -21,14 +22,15 @@ class SharedContainer implements ContainerInterface
 {
     public const DEFAULT_INSTANCE = 'GCUNIVERSAL';
     public const RESTRICTED       = [
-        'common'        => 'setCommon',
-        'user'          => 'setUser',
-        'twig'          => 'setTwig',
-        'globals'       => 'setGlobals',
-        'router'        => 'setRouter',
-        'page_wrapper'  => 'setPageWrapper',
-        'ui_core'       => 'setUICore',
-        'object_manager'=> 'setObjectManager',
+        'common'           => 'setCommon',
+        'user'             => 'setUser',
+        'twig'             => 'setTwig',
+        'globals'          => 'setGlobals',
+        'router'           => 'setRouter',
+        'page_wrapper'     => 'setPageWrapper',
+        'ui_core'          => 'setUICore',
+        'object_manager'   => 'setObjectManager',
+        'exception_logger' => 'setExceptionLogger',
     ];
 
     protected static array $instances = [];
@@ -385,6 +387,40 @@ class SharedContainer implements ContainerInterface
         $id = 'object_manager';
         if (!isset($this->items[$id])) {
             throw new ItemNotFoundException('Object Manager has not been defined');
+        }
+        if (\is_callable($this->items[$id])) {
+            $this->items[$id] = $this->items[$id]();
+        }
+
+        return $this->items[$id];
+    }
+
+    /**
+     * @param ExceptionLoggerInterface|callable $cUICore
+     *
+     * @throws ItemAlreadyExistsException
+     *
+     * @return void
+     */
+    public function setExceptionLogger(ExceptionLoggerInterface|callable $cUICore): void
+    {
+        if (isset($this->items['exception_logger'])) {
+            throw new ItemAlreadyExistsException('Exception Logger is already set');
+        }
+
+        $this->items['exception_logger'] = $cUICore;
+    }
+
+    /**
+     * @throws ItemNotFoundException
+     *
+     * @return ObjectManager
+     */
+    public function getExceptionLogger(): ObjectManager
+    {
+        $id = 'exception_logger';
+        if (!isset($this->items[$id])) {
+            throw new ItemNotFoundException('Exception Logger has not been defined');
         }
         if (\is_callable($this->items[$id])) {
             $this->items[$id] = $this->items[$id]();

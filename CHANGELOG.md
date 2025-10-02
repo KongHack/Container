@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.1.2](https://github.com/KongHack/Container/releases/tag/1.1.2)
+- @GameCharmer Add support for Exception Logger
+
+
+
 ## [1.1.1](https://github.com/KongHack/Container/releases/tag/1.1.1)
 - @GameCharmer Add support for loading Object Manager
 - @GameCharmer Cleanup gitignore, remove composer.lock from repo
