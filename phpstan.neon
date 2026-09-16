@@ -1,15 +1,10 @@
-includes:
-	- phpstan.neon.dist
-	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
 parameters:
-	reportUnmatchedIgnoredErrors: false
-	excludePaths:
-		- %rootDir%/../../../src/Generated/*
-		- %rootDir%/../../../src/Composer.php
-		- %rootDir%/../../../src/CronJobs/PendingApplicationDigestCron.php
+	level: 6
+	paths:
+		- src
+		- tests
 
-	ignoreErrors:
-		- '#Function d invoked with*#'
+	reportUnmatchedIgnoredErrors: false
 
 	parallel:
 		processTimeout: 3000.0
@@ -17,6 +12,7 @@ parameters:
 
 	tipsOfTheDay: false
 
-	checkMissingIterableValueType: false
-	checkGenericClassInNonGenericObjectType: false
-	treatPhpDocTypesAsCertain: false
+	ignoreErrors:
+		-
+			identifier: new.static
+			path: src/Core/SharedContainer.php

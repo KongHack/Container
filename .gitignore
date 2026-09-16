@@ -11,6 +11,7 @@
 .php-cs-fixer.php.cache
 .php-cs-fixer.cache
 .phpunit.result.cache
+.phpunit.cache/
 vendor/*
 docker-compose.override.yml
 

@@ -6,6 +6,35 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.2.0](https://github.com/KongHack/Container/releases/tag/1.2.0)
+
+### Added
+- Add `InvalidItemException` for invalid service registrations.
+- Add PSR-11 implementation metadata through Composer's `psr/container-implementation` virtual package.
+- Add a PHPUnit test suite covering named instances, eager and lazy services, static-method loaders, loader retries,
+  non-resolving inspection, duplicate and reserved registrations, typed services, PSR-11 not-found behavior, and null
+  rejection.
+- Add Composer scripts for syntax checks, PHPStan, PHP_CodeSniffer, PHPUnit, and the combined quality suite.
+- Add GitHub Actions quality checks on PHP 8.4 and 8.5, dependency auditing, release metadata validation, and automated
+  GitHub releases for semantic-version tags.
+- Add comprehensive usage documentation for installation, Composer bootstrapping, lazy services, typed services,
+  named instances, compatibility behavior, and development.
+
+### Changed
+- Reject `null` values passed to `SharedContainer::set()` or `SharedContainer::overwrite()` instead of silently
+  treating them as absent entries.
+- Modernize the PHPStan and PHP_CodeSniffer configurations to analyze both source and test code.
+- Update development tooling for PHPUnit 12, PHP_CodeSniffer 4, and CodeSnifferContrib 2.2.
+- Document container array types, item-key return types, and exceptions for static analysis.
+- Ignore PHPUnit's generated cache directory while continuing to leave `composer.lock` untracked for consumer
+  compatibility.
+
+### Fixed
+- Fix case-insensitive reserved identifier checks so names such as `COMMON` report the correct dedicated setter without
+  producing an undefined array-key warning.
+
+
+
 ## [1.1.5](https://github.com/KongHack/Container/releases/tag/1.1.5)
 - @GameCharmer Update Dependencies
 
@@ -97,5 +126,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.0](https://github.com/KongHack/Container/releases/tag/1.0.0)
 - @GameCharmer Initial Version
-
 

@@ -3,11 +3,13 @@
     <description>GC Coding Standard and Config</description>
 
     <file>src/</file>
+    <file>tests/</file>
     <exclude-pattern>*/Generated/*</exclude-pattern>
 
     <arg name="encoding" value="UTF-8"/>
     <arg name="extensions" value="php"/>
     <arg value="s"/>
+    <arg name="warning-severity" value="0"/>
     <arg name="tab-width" value="4"/>
 
     <rule ref="vendor/gcworld/code_sniffer_contrib/CodeSnifferContrib/">
@@ -15,6 +17,12 @@
         <exclude name="CodeSnifferContrib.Commenting.FunctionComment.InvalidNoReturn"/>
         <exclude name="CodeSnifferContrib.Commenting.ClassComment.TagNotAllowed"/>
         <exclude name="Squiz.Commenting.FunctionCommentThrowTag.WrongNumber"/>
+    </rule>
+    <rule ref="CodeSnifferContrib.Commenting.ClassComment">
+        <exclude-pattern>tests/*</exclude-pattern>
+    </rule>
+    <rule ref="CodeSnifferContrib.Commenting.FunctionComment">
+        <exclude-pattern>tests/*</exclude-pattern>
     </rule>
 
     <rule ref="Generic.Files.LineLength">
@@ -26,7 +34,6 @@
     <rule ref="Generic.Strings.UnnecessaryStringConcat">
         <properties>
             <property name="allowMultiline" value="true" />
-            <property name="error" value="false" />
         </properties>
         <exclude name="Generic.Strings.UnnecessaryStringConcat.Found"/>
     </rule>
@@ -38,9 +45,15 @@
         </properties>
     </rule>
     <rule ref="Generic.PHP.ForbiddenFunctions">
-      <properties>
-        <property name="forbiddenFunctions" type="array" value="sizeof=>count,delete=>unset,print=>echo,is_null=>null,create_function=>null"/>
-      </properties>
+        <properties>
+            <property name="forbiddenFunctions" type="array">
+                <element key="sizeof" value="count"/>
+                <element key="delete" value="unset"/>
+                <element key="print" value="echo"/>
+                <element key="is_null" value="null"/>
+                <element key="create_function" value="null"/>
+            </property>
+        </properties>
     </rule>
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>

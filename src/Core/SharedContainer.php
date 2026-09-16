@@ -3,6 +3,7 @@ namespace GCWorld\Container\Core;
 
 use GCWorld\Container\Exceptions\ItemAlreadyExistsException;
 use GCWorld\Container\Exceptions\ItemNotFoundException;
+use GCWorld\Container\Exceptions\InvalidItemException;
 use GCWorld\Container\Exceptions\SpecificItemException;
 use GCWorld\Globals\GlobalsInterface;
 use GCWorld\Interfaces\CommonInterface;
@@ -33,14 +34,18 @@ class SharedContainer implements ContainerInterface
         'exception_logger' => 'setExceptionLogger',
     ];
 
+    /** @var array<string, static> */
     protected static array $instances = [];
 
+    /** @var array<string, mixed> */
     protected array $items = [];
 
     /**
      * SharedContainer Constructor
      */
-    protected function __construct() { }
+    protected function __construct()
+    {
+    }
 
 
     /**
@@ -58,7 +63,7 @@ class SharedContainer implements ContainerInterface
     }
 
     /**
-     * @return array
+     * @return list<string>
      */
     public function getItemKeys(): array
     {
@@ -102,6 +107,8 @@ class SharedContainer implements ContainerInterface
      * @param mixed  $item
      *
      * @throws ItemAlreadyExistsException
+     * @throws InvalidItemException
+     * @throws SpecificItemException
      *
      * @return void
      */
@@ -111,6 +118,9 @@ class SharedContainer implements ContainerInterface
         if (isset($this->items[$id])) {
             throw new ItemAlreadyExistsException('Item Already Exists: '.$id);
         }
+        if ($item === null) {
+            throw new InvalidItemException('Item cannot be null: '.$id);
+        }
 
         $this->items[$id] = $item;
     }
@@ -119,11 +129,18 @@ class SharedContainer implements ContainerInterface
      * @param string $id
      * @param mixed  $item
      *
+     * @throws InvalidItemException
+     * @throws SpecificItemException
+     *
      * @return void
      */
     public function overwrite(string $id, mixed $item): void
     {
         $this->checkSpecific($id);
+        if ($item === null) {
+            throw new InvalidItemException('Item cannot be null: '.$id);
+        }
+
         $this->items[$id] = $item;
     }
 
@@ -439,7 +456,7 @@ class SharedContainer implements ContainerInterface
     protected function checkSpecific(string $id): void
     {
         if (isset(self::RESTRICTED[\strtolower($id)])) {
-            throw new SpecificItemException('Please use the "'.self::RESTRICTED[$id].'" method to set "'.$id.'"');
+            throw new SpecificItemException('Please use the "'.self::RESTRICTED[\strtolower($id)].'" method to set "'.$id.'"');
         }
     }
 }

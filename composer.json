@@ -12,6 +12,11 @@
       "GCWorld\\Container\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "GCWorld\\Container\\Tests\\": "tests/"
+    }
+  },
   "require": {
     "php":">=8.4",
     "ext-json": "*",
@@ -27,15 +32,31 @@
     "ramsey/uuid": "^4.6",
     "psr/container": "^2.0"
   },
+  "provide": {
+    "psr/container-implementation": "1.0.0"
+  },
   "require-dev": {
     "phpstan/phpstan": ">=2.1",
     "phpstan/phpstan-deprecation-rules": ">=2.0",
     "friendsofphp/php-cs-fixer": "^3.14",
-    "gcworld/code_sniffer_contrib": "^2.1.1",
-    "squizlabs/php_codesniffer": "^3.7.1",
+    "gcworld/code_sniffer_contrib": "^2.2",
+    "squizlabs/php_codesniffer": "^4.0",
     "phpmd/phpmd": ">=2.13",
     "php-parallel-lint/php-parallel-lint": "^1.3",
-    "povils/phpmnd": "^3.0"
+    "povils/phpmnd": "^3.0",
+    "phpunit/phpunit": "^12.0"
+  },
+  "scripts": {
+    "lint": "find src tests -name '*.php' -print0 | xargs -0 -n1 php -l",
+    "phpstan": "phpstan analyse --no-progress --memory-limit=1G",
+    "phpcs": "phpcs",
+    "test": "phpunit",
+    "check": [
+      "@lint",
+      "@phpstan",
+      "@phpcs",
+      "@test"
+    ]
   },
   "license":"proprietary",
   "config": {
