@@ -1,0 +1,26 @@
+services:
+  php:
+    environment:
+      HOME: '${HOME}'
+      COMPOSER_HOME: '${HOME}/.config/composer'
+      COMPOSER_CACHE_DIR: '${HOME}/.cache/composer'
+    volumes:
+      - type: bind
+        source: '${HOME}/.config/composer/auth.json'
+        target: '${HOME}/.config/composer/auth.json'
+        read_only: true
+      - type: bind
+        source: '${HOME}/.cache/composer'
+        target: '${HOME}/.cache/composer'
+      - type: bind
+        source: '${HOME}/.ssh'
+        target: '${HOME}/.ssh'
+        read_only: true
+      - type: bind
+        source: '/etc/passwd'
+        target: '/etc/passwd'
+        read_only: true
+      - type: bind
+        source: '/etc/group'
+        target: '/etc/group'
+        read_only: true
