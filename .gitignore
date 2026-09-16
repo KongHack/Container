@@ -12,6 +12,7 @@
 .php-cs-fixer.cache
 .phpunit.result.cache
 vendor/*
+docker-compose.override.yml
 
 .bash_history
 .mysql_history
