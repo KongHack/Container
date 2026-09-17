@@ -1,5 +1,12 @@
 # Container
 
+![Packagist](https://img.shields.io/packagist/dm/gcworld/container.svg)
+![Packagist](https://img.shields.io/packagist/dt/gcworld/container.svg)
+
+![Packagist PHP](https://img.shields.io/packagist/php-v/gcworld/container.svg)
+![Packagist](https://img.shields.io/packagist/v/gcworld/container.svg)
+![GitHub](https://img.shields.io/github/tag/konghack/container.svg)
+
 `gcworld/container` implements the [PSR-11 container read interface](https://www.php-fig.org/psr/psr-11/) for PHP 8.4
 and later, with additional APIs for registering eager services, lazy factories, typed framework services, and
 independently named container instances.
